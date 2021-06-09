@@ -3,11 +3,7 @@ import axios from "axios";
 import { filterArray, ipfs_BASEURL, pohApi_URL } from "../constants";
 import WordcloudCanvas from "../components/WordcloudCanvas";
 import ReasonsList from "../components/ReasonsList";
-
-export type Reason = {
-  description: string;
-  createdAt: Date;
-};
+import { klerosCaseURL, pohProfileURL, Reason } from "../model/Reason";
 
 type HomeModel = {
   reasonsList:
@@ -45,14 +41,7 @@ const Home = () => {
       return <span>Oops</span>;
     case "success":
       return (
-        <div className="Home">
-          <input
-            type="date"
-            onChange={(e) => {
-              setModel({ ...model, selectedDate: e.target.valueAsDate });
-            }}
-            min="2021-03-10"
-          ></input>
+        <div className="w-full">
           {model.selectedDate !== null ? (
             <div>
               <div style={{ display: "flex", height: "400px" }}>
@@ -85,18 +74,6 @@ const Home = () => {
                   />
                 </div>
               </div>
-              <div>
-                <ReasonsList
-                  filterF={(reason) =>
-                    model.selectedWord
-                      ? reason.description
-                          .toLowerCase()
-                          .includes(model.selectedWord)
-                      : true
-                  }
-                  reasons={model.reasonsList.reasons}
-                />
-              </div>
             </div>
           ) : (
             <WordcloudCanvas
@@ -109,21 +86,48 @@ const Home = () => {
               filterWords={filterArray}
             />
           )}
+          <div className="text-center">
+            <input
+              type="date"
+              onChange={(e) => {
+                setModel({ ...model, selectedDate: e.target.valueAsDate });
+              }}
+              min="2021-03-10"
+            ></input>
+          </div>
+
+          <h2 className="text-left text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+            {model.selectedWord
+              ? `Challenges containing ${model.selectedWord.toLocaleUpperCase()}`
+              : `All challenges`}
+          </h2>
+          <ReasonsList
+            filterF={(reason) =>
+              model.selectedWord
+                ? reason.description.toLowerCase().includes(model.selectedWord)
+                : true
+            }
+            reasons={model.reasonsList.reasons}
+          />
         </div>
       );
   }
 };
 
 const query = `query {
-    challenges(first: 1000 where: {reason_not:"None"}) {
-      request (where: {}) {
-        creationTime
-        evidence (orderBy:creationTime) {
-          URI
-        }
+  challenges(first: 1000 where: {reason_not:"None"} orderBy:creationTime orderDirection: desc) {
+  disputeID  
+  request {
+    submission {
+      id
+    }
+    creationTime
+      evidence (orderBy:creationTime) {
+        URI
       }
     }
-  }`;
+  }
+}`;
 
 const getChallengesReasons = async (): Promise<Reason[]> => {
   const res = await axios({
@@ -148,6 +152,8 @@ const getChallengesReasons = async (): Promise<Reason[]> => {
         bigBoy.push({
           description: evidenceRes.data.description,
           createdAt: new Date(request.creationTime * 1000),
+          klerosCase: klerosCaseURL(challenges[i].disputeID),
+          pohAddress: pohProfileURL(request.submission.id),
         });
       } catch (err) {
         console.error(err);

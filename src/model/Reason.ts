@@ -2,7 +2,7 @@ export type Reason = {
   description: string;
   createdAt: Date;
   pohAddress: string;
-  klerosCase: string;
+  klerosCase: number;
 };
 
 export const pohProfileURL = (pohAddress: string) => {
@@ -10,7 +10,7 @@ export const pohProfileURL = (pohAddress: string) => {
   return url;
 };
 
-export const klerosCaseURL = (klerosCase: string) => {
+export const klerosCaseURL = (klerosCase: number) => {
   const url = `https://resolve.kleros.io/cases/${klerosCase}`;
   return url;
 };

@@ -3,7 +3,9 @@ import axios from "axios";
 import { filterArray, ipfs_BASEURL, pohApi_URL } from "../constants";
 import WordcloudCanvas from "../components/WordcloudCanvas";
 import ReasonsList from "../components/ReasonsList";
-import { klerosCaseURL, pohProfileURL, Reason } from "../model/Reason";
+import { Reason } from "../model/Reason";
+import { allPromisesKeepResults } from "../utils";
+import _ from "lodash";
 
 type HomeModel = {
   reasonsList:
@@ -107,7 +109,10 @@ const Home = () => {
                 ? reason.description.toLowerCase().includes(model.selectedWord)
                 : true
             }
-            reasons={model.reasonsList.reasons}
+            reasons={_.sortBy(
+              model.reasonsList.reasons,
+              (reason) => -reason.klerosCase
+            )}
           />
         </div>
       );
@@ -122,9 +127,9 @@ const query = `query {
       id
     }
     creationTime
-      evidence (orderBy:creationTime) {
-        URI
-      }
+    evidence (orderBy:creationTime) {
+      URI
+    }
     }
   }
 }`;
@@ -138,29 +143,29 @@ const getChallengesReasons = async (): Promise<Reason[]> => {
     },
   });
 
-  const challenges = res.data.data.challenges;
-  const bigBoy: Reason[] = [];
-  for (let i = 0; i < challenges.length; i++) {
-    let request = challenges[i].request;
-    if (
-      request.evidence.length > 1 &&
-      request.evidence["1"].URI.search(".json") !== -1
-    ) {
-      let evidenceURI = request.evidence["1"].URI;
-      try {
-        let evidenceRes = await axios.get(`${ipfs_BASEURL}${evidenceURI}`);
-        bigBoy.push({
-          description: evidenceRes.data.description,
-          createdAt: new Date(request.creationTime * 1000),
-          klerosCase: klerosCaseURL(challenges[i].disputeID),
-          pohAddress: pohProfileURL(request.submission.id),
-        });
-      } catch (err) {
-        console.error(err);
-      }
+  const challenges: any[] = res.data.data.challenges;
+
+  const buildReasonPromise = async (challenge: any): Promise<Reason> => {
+    const request = challenge.request;
+    if (request.evidence.length > 1) {
+      const evidenceURI = request.evidence[1].URI;
+      const evidenceRes = await axios.get(`${ipfs_BASEURL}${evidenceURI}`);
+      return {
+        description: evidenceRes.data.description,
+        createdAt: new Date(request.creationTime * 1000),
+        klerosCase: challenge.disputeID,
+        pohAddress: request.submission.id,
+      };
+    } else {
+      return Promise.reject("no evidence");
     }
-  }
-  return bigBoy;
+  };
+
+  const reasons = await allPromisesKeepResults(
+    challenges.map(buildReasonPromise)
+  );
+
+  return reasons;
 };
 
 export default Home;

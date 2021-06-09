@@ -1,10 +1,11 @@
 import { FingerPrintIcon, ScaleIcon } from "@heroicons/react/outline";
-import { Reason } from "../model/Reason";
+import { klerosCaseURL, pohProfileURL, Reason } from "../model/Reason";
 type ReasonsListProps = {
   reasons: Reason[];
   filterF: (reason: Reason) => boolean;
 };
 const ReasonsList = (props: ReasonsListProps) => {
+  console.log(props.reasons);
   return (
     <div className="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
       <div className="shadow overflow-hidden border-b min-w-full max-w-full border-gray-200 sm:rounded-lg">
@@ -40,7 +41,7 @@ const ReasonsList = (props: ReasonsListProps) => {
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href={reason.pohAddress}
+                    href={pohProfileURL(reason.pohAddress)}
                     className="text-indigo-400 hover:text-indigo-900"
                   >
                     <FingerPrintIcon className="h-5 w-5 text-blue-500" />
@@ -50,7 +51,7 @@ const ReasonsList = (props: ReasonsListProps) => {
                   <a
                     rel="noreferrer"
                     target="_blank"
-                    href={reason.klerosCase}
+                    href={klerosCaseURL(reason.klerosCase)}
                     className="text-indigo-600 hover:text-indigo-900"
                   >
                     <ScaleIcon className="h-5 w-5 text-blue-500" />

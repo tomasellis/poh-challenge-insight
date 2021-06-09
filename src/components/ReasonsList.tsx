@@ -39,6 +39,7 @@ const ReasonsList = (props: ReasonsListProps) => {
                 <td className="px-6 whitespace-nowrap text-right text-sm font-medium">
                   <a
                     target="_blank"
+                    rel="noreferrer"
                     href={reason.pohAddress}
                     className="text-indigo-400 hover:text-indigo-900"
                   >
@@ -47,6 +48,7 @@ const ReasonsList = (props: ReasonsListProps) => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <a
+                    rel="noreferrer"
                     target="_blank"
                     href={reason.klerosCase}
                     className="text-indigo-600 hover:text-indigo-900"

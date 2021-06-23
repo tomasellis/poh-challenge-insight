@@ -4,6 +4,7 @@ export const ipfs_BASEURL = "https://ipfs.io/";
 export const initialChallengeDate = 1615334400;
 export const filterArray = [
   "has",
+  "as",
   "the",
   "is",
   "in",

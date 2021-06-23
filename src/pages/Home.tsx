@@ -6,6 +6,7 @@ import ReasonsList from "../components/ReasonsList";
 import { Reason } from "../model/Reason";
 import { allPromisesKeepResults } from "../utils";
 import _ from "lodash";
+import { RefreshIcon } from "@heroicons/react/outline";
 
 type HomeModel = {
   reasonsList:
@@ -25,7 +26,7 @@ const Home = () => {
     selectedDate: null,
     selectedWord: null,
   });
-
+  //eslint-disable-next-line
   const go = async () => {
     const reasons = await getChallengesReasons();
     setModel({ ...model, reasonsList: { type: "success", reasons: reasons } });
@@ -38,16 +39,70 @@ const Home = () => {
 
   switch (model.reasonsList.type) {
     case "loading":
-      return <span>Loading</span>;
+      return (
+        <div>
+          <div
+            className="lds-roller"
+            style={{
+              display: "flex",
+              height: "100vh",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "2rem",
+            }}
+          >
+            <div>L</div>
+            <div>o</div>
+            <div>a</div>
+            <div>d</div>
+            <div>i</div>
+            <div>n</div>
+            <div>g</div>
+            <div>🛠</div>
+          </div>
+        </div>
+      );
     case "error":
-      return <span>Oops</span>;
+      return (
+        <span
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "4rem",
+          }}
+        >
+          Oops 😩 there was an error
+        </span>
+      );
     case "success":
       return (
-        <div className="w-full">
+        <div className="w-full" style={{ backgroundColor: "#ec9b36" }}>
+          <div
+            style={{
+              textAlign: "center",
+              fontFamily: "News of the World",
+              fontSize: "5rem",
+              backgroundColor: "#fff",
+            }}
+          >
+            Challenge Insight
+          </div>
           {model.selectedDate !== null ? (
             <div>
-              <div style={{ display: "flex", height: "400px" }}>
-                <div style={{ flexGrow: 1 }}>
+              <div
+                style={{
+                  display: "flex",
+                  height: "400px",
+                }}
+              >
+                <div style={{ flex: 1, textAlign: "center" }}>
+                  <span style={{ fontFamily: "Junegull", fontSize: "1.5rem" }}>
+                    Most used words before{" "}
+                    {`${model.selectedDate.toUTCString()}`}
+                  </span>
+
                   <WordcloudCanvas
                     onClick={(word) => {
                       setModel({ ...model, selectedWord: word });
@@ -61,7 +116,11 @@ const Home = () => {
                     filterWords={filterArray}
                   />
                 </div>
-                <div style={{ flexGrow: 1 }}>
+                <div style={{ flex: 1, textAlign: "center" }}>
+                  <span style={{ fontFamily: "Junegull", fontSize: "1.5rem" }}>
+                    Most used words after{" "}
+                    {`${model.selectedDate.toUTCString()}`}
+                  </span>
                   <WordcloudCanvas
                     onClick={(word) => {
                       setModel({ ...model, selectedWord: word });
@@ -76,32 +135,91 @@ const Home = () => {
                   />
                 </div>
               </div>
+              <div className="text-center mt-16">
+                <span
+                  style={{
+                    fontSize: "1.3rem",
+                    marginRight: "1rem",
+                    fontFamily: "Junegull",
+                  }}
+                >
+                  Select a date and compare the words!{"   "}
+                </span>
+                <input
+                  className="rounded"
+                  style={{
+                    padding: "0.5rem",
+                    border: "2px solid",
+                  }}
+                  type="date"
+                  onChange={(e) => {
+                    setModel({
+                      ...model,
+                      selectedDate: e.currentTarget.valueAsDate,
+                    });
+                  }}
+                  min="2021-03-10"
+                ></input>
+              </div>
             </div>
           ) : (
-            <WordcloudCanvas
-              onClick={(word) => {
-                setModel({ ...model, selectedWord: word });
-              }}
-              reasons={model.reasonsList.reasons.map(
-                (reason) => reason.description
-              )}
-              filterWords={filterArray}
-            />
+            <div>
+              <div className="flex justify-center">
+                <WordcloudCanvas
+                  onClick={(word) => {
+                    setModel({ ...model, selectedWord: word });
+                  }}
+                  reasons={model.reasonsList.reasons.map(
+                    (reason) => reason.description
+                  )}
+                  filterWords={filterArray}
+                />
+              </div>
+              <div className="text-center ">
+                <span
+                  style={{
+                    fontSize: "1.3rem",
+                    marginRight: "1rem",
+                    fontFamily: "Junegull",
+                  }}
+                >
+                  Select a date and compare the words!{"  "}
+                </span>
+                <input
+                  className="rounded"
+                  style={{
+                    padding: "0.5rem",
+                    border: "2px solid",
+                  }}
+                  type="date"
+                  onChange={(e) => {
+                    setModel({
+                      ...model,
+                      selectedDate: e.currentTarget.valueAsDate,
+                    });
+                  }}
+                  min="2021-03-10"
+                ></input>
+              </div>
+            </div>
           )}
-          <div className="text-center">
-            <input
-              type="date"
-              onChange={(e) => {
-                setModel({ ...model, selectedDate: e.target.valueAsDate });
-              }}
-              min="2021-03-10"
-            ></input>
-          </div>
-
-          <h2 className="text-left text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-            {model.selectedWord
-              ? `Challenges containing ${model.selectedWord.toLocaleUpperCase()}`
-              : `All challenges`}
+          <h2 className="p-2 text-left text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+            <button></button>
+            {model.selectedWord ? (
+              <div className="flex">
+                Filtering by challenges that include:{" "}
+                {model.selectedWord.toLocaleUpperCase()}
+                {"  "}
+                <button>
+                  <RefreshIcon
+                    className="ml-1 h-6 w-6 text-blue-500"
+                    onClick={(e) => setModel({ ...model, selectedWord: null })}
+                  />
+                </button>
+              </div>
+            ) : (
+              `You can filter the challenges by clicking on a word! Now seeing all of 'em!`
+            )}
           </h2>
           <ReasonsList
             filterF={(reason) =>

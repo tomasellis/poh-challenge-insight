@@ -5,7 +5,6 @@ type ReasonsListProps = {
   filterF: (reason: Reason) => boolean;
 };
 const ReasonsList = (props: ReasonsListProps) => {
-  console.log(props.reasons);
   return (
     <div className="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
       <div className="shadow overflow-hidden border-b min-w-full max-w-full border-gray-200 sm:rounded-lg">

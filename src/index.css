@@ -17,6 +17,10 @@ code {
     monospace;
 }
 
+.LeftText {
+  font-family: Padauk;
+}
+
 .description > p {
   width: 70vw;
 }
@@ -128,4 +132,9 @@ code {
   font-family: "News of the World";
   src: url("./assets/fonts/News\ of\ the\ World\ regular.ttf")
     format("truetype");
+}
+
+@font-face {
+  font-family: "Padauk";
+  src: url("./assets/fonts/Padauk-Regular.ttf") format("truetype");
 }

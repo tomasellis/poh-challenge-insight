@@ -7,8 +7,12 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className={"flex flex-col w-full h-full"}>
-      <div className={"flex flex-col w-full xl:flex-row xl:h-4/5"}>
+    <div className={"flex flex-col w-screen h-screen"}>
+      <div
+        className={
+          "flex-1 flex flex-col w-full xl:flex-row xl:h-5/6"
+        }
+      >
         <div className={"LeftText flex-1 flex flex-col items-center"}>
           <div
             className={
@@ -140,7 +144,7 @@ const Landing = () => {
       </div>
       <div
         className={
-          "flex flex-row w-full justify-center items-center py-12 m-auto ssm:py-8 sm:py-16 lg:m-0 lg:py-10 lg:h-1/5 xl:pt-14"
+          "flex flex-row w-full justify-center items-center py-12 ssm:py-8 sm:py-16 lg:m-0 lg:py-10 lg:h-1/5 xl:h-screen xl:pt-14"
         }
       >
         <Link

@@ -8,60 +8,130 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className={"w-full h-full"}>
-      <div className={"flex flex-row w-full h-4/5"}>
+    <div className={"flex flex-col w-full h-full"}>
+      <div className={"flex flex-col w-full xl:flex-row xl:h-4/5"}>
         <div className={"LeftText flex-1 flex flex-col items-center"}>
-          <div className={"w-full text-7xl pl-20 pt-16 leading-snug"}>
+          <div
+            className={
+              "w-full text-3xl sssm:text-4xl pl-5 ssm:pl-7 pt-10 ssm:text-5xl sm:text-7xl sm:pl-20 sm:pt-20 md:pl-12 md:pt-20 md:text-8xl lg:pt-24 xl:pt-20 xl:pl-20 xl:text-7xl leading-snug"
+            }
+          >
             <span className={"px-3 bg-gray-400"}>Easily</span> accessible{" "}
           </div>
-          <div className={"w-full text-7xl pl-20 pt-4 leading-snug"}>
+          <div
+            className={
+              "w-full text-3xl sssm:text-4xl pl-5 pt-3 ssm:pl-7 ssm:text-5xl ssm:pt-8 sm:text-7xl sm:pt-10 sm:pl-20 md:pl-12 md:pt-16 md:text-8xl xl:text-7xl xl:pl-20 leading-snug"
+            }
+          >
             <span className={"px-3 bg-black text-white"}>PoH</span> challenges{" "}
           </div>
-          <div className={"w-full text-7xl pl-20 pt-4 leading-snug"}>
+          <div
+            className={
+              "w-full text-3xl sssm:text-4xl pl-5 pt-3 ssm:pl-7 ssm:text-5xl ssm:pt-8 sm:text-7xl sm:pt-10 sm:pl-20 md:pl-12 md:pt-16 md:text-8xl xl:text-7xl xl:pl-20 leading-snug"
+            }
+          >
             <span className={"px-3 bg-yellow-400"}>information.</span>{" "}
           </div>
-          <div className={"w-full text-3xl pt-5 pl-20 "}>
+          <div
+            className={
+              "w-full text-base pl-5  sssm:text-xl sssm:pl-7 pt-4 ssm:pt-6 ssm:text-2xl sm:text-3xl sm:pl-20 md:text-4xl md:pt-10 md:pl-12 lg:pt-12 lg:text-5xl xl:pt-10 xl:pl-20 xl:text-4xl"
+            }
+          >
             <span>Justice is worth finding.</span>
           </div>
         </div>
         <div className={"LeftText flex-1 flex flex-col items-center"}>
-          <div className={"w-full pt-16 flex flex-row flex-nowrap"}>
+          <div
+            className={
+              "w-full pt-8 sm:pt-20 lg:pt-24 xl:pl-10 flex flex-row flex-nowrap"
+            }
+          >
             <div className={"w-1/5 flex flex-col items-center"}>
               <span className={"text-center"}>
-                <ClipboardListIcon className={"h-12 w-12 text-blue-500"} />
+                <ClipboardListIcon
+                  className={
+                    "h-8 sssm:h-10 ssm:h-12 sm:h-14 lg:h-20 xl:h-14 text-black"
+                  }
+                />
               </span>
             </div>
-            <div className={"w-4/5 mr-20"}>
-              <div className={"text-4xl"}>Every challenge justification</div>{" "}
-              <div className={"text-xl"}>
+            <div className={"w-4/5 sm:mr-20"}>
+              <div
+                className={
+                  "font-bold sm:font-normal text-xl ssm:text-2xl sm:text-4xl md:text-5xl xl:text-3xl"
+                }
+              >
+                Every challenge justification
+              </div>{" "}
+              <div
+                className={
+                  "text-sm w-5/6 ssm:text-xl ssm:w-11/12 sm:w-11/12 xl:w-auto sm:text-xl md:text-3xl xl:text-xl md:w-full"
+                }
+              >
                 At the tip of your fingers, straight from the Source, you can
                 read each and every challenge justification in detail.
               </div>{" "}
             </div>
           </div>
-          <div className={"w-full pt-8 flex flex-row flex-nowrap"}>
-            <div className={"w-1/5 flex flex-col  items-center"}>
+          <div
+            className={
+              "w-full pt-8 lg:pt-12 xl:pl-10 flex flex-row flex-nowrap"
+            }
+          >
+            <div className={"w-1/5 flex flex-col items-center"}>
               <span className={"text-center"}>
-                <ChartPieIcon className={"h-12 w-12 text-blue-500"} />
+                <ChartPieIcon
+                  className={
+                    "h-8 sssm:h-10 ssm:h-12 sm:h-14 lg:h-20 xl:h-14 text-black"
+                  }
+                />
               </span>
             </div>
-            <div className={"w-4/5 mr-20"}>
-              <div className={"text-4xl"}>Graphics galore</div>{" "}
-              <div className={"text-xl"}>
+            <div className={"w-4/5 sm:mr-20"}>
+              <div
+                className={
+                  "font-bold sm:font-normal text-xl ssm:text-2xl sm:text-4xl md:text-5xl xl:text-3xl"
+                }
+              >
+                Graphics galore
+              </div>{" "}
+              <div
+                className={
+                  "text-sm w-5/6 ssm:w-11/12 ssm:text-xl xl:w-auto sm:text-xl md:text-3xl xl:text-xl md:w-full"
+                }
+              >
                 Who doesn’t love a good graphic, displaying data with colors has
                 never been easier.
               </div>{" "}
             </div>
           </div>
-          <div className={"w-full pt-8 flex flex-row flex-nowrap"}>
+          <div
+            className={
+              "w-full pt-8 lg:pt-12 xl:pl-10 flex flex-row flex-nowrap"
+            }
+          >
             <div className={"w-1/5 flex flex-col items-center"}>
               <span className={"text-center"}>
-                <FingerPrintIcon className={"h-12 w-12 text-blue-500"} />
+                <FingerPrintIcon
+                  className={
+                    "h-8 sssm:h-10 ssm:h-12 sm:h-14 lg:h-20 xl:h-14 text-black"
+                  }
+                />
               </span>
             </div>
-            <div className={"w-4/5 mr-20"}>
-              <div className={"text-4xl"}>Gather your evidence</div>{" "}
-              <div className={"text-xl"}>
+            <div className={"w-4/5 sm:mr-20"}>
+              <div
+                className={
+                  "font-bold sm:font-normal text-xl ssm:text-2xl sm:text-4xl md:text-5xl xl:text-3xl"
+                }
+              >
+                Gather your evidence
+              </div>{" "}
+              <div
+                className={
+                  "text-sm w-5/6 sm:w-11/12 xl:w-auto ssm:text-xl md:text-3xl xl:text-xl md:w-full"
+                }
+              >
                 A puppeteer arrived in town? Check your suspicions by filtering
                 the challenges to your heart’s content.
               </div>{" "}
@@ -69,21 +139,25 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className={"flex flex-row w-full h-1/5 justify-center items-center"}>
+      <div
+        className={
+          "flex flex-row w-full justify-center items-center py-12 m-auto ssm:py-8 sm:py-16 lg:m-0 lg:py-10 lg:h-1/5 xl:pt-14"
+        }
+      >
         <Link
           to="/home"
-          className="flex justify-center items-center bg-black hover:bg-yellow-400 hover:text-black text-white font-bold text-xl py-2 px-4 h-3/6 w-1/5 mx-10 rounded"
+          className="flex justify-center items-center bg-black hover:bg-yellow-400 hover:text-black text-white font-bold py-2 px-4 text-xs ssm:text-sm w-64 mx-2 h-12 sm:text-xl sm:h-16 sm:w-48 sm:mx-10 rounded md:w-4/12 lg:h-20 lg:w-6/12 lg:text-4xl xl:text-xl xl:h-16 xl:w-64"
         >
-          <span>Try our starter's guide!</span>
+          <span className="text-center">Try our starter's guide!</span>
         </Link>
 
         <Link
           to="/home"
           className={
-            "flex justify-center items-center border border-gray-700 hover:bg-gray-400 text-black font-bold text-xl py-2 px-4 h-3/6 w-1/5 mx-10 rounded"
+            "flex justify-center items-center border border-gray-700 hover:bg-gray-400 text-black font-bold py-2 px-4  w-64 mx-2 h-12 text-xs ssm:text-sm sm:text-xl sm:w-48 sm:mx-10 rounded sm:h-16 md:w-4/12 lg:w-6/12 lg:h-20 lg:text-4xl xl:text-xl xl:h-16 xl:w-64"
           }
         >
-          <span>I know how to use it.</span>
+          <span className={"text-center"}>I know how to use it.</span>
         </Link>
       </div>
     </div>

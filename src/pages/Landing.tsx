@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Landing = () => {
   return (
     <div className={"flex flex-col w-screen h-screen"}>
-      <div className={"flex-1 flex flex-col w-full xl:flex-row xl:h-4/6"}>
+      <div className={"flex-1 flex flex-col w-full xl:flex-row"}>
         <div className={"LeftText flex-1 flex flex-col items-center"}>
           <div
             className={
@@ -140,12 +140,12 @@ const Landing = () => {
       </div>
       <div
         className={
-          "flex flex-row w-full justify-center items-center py-12 ssm:py-8 sm:py-16 lg:m-0 lg:py-10 lg:h-1/5 xl:h-2/6 xl:pt-14"
+          "flex flex-row w-full justify-center items-center py-12 ssm:py-8 sm:py-16 lg:my-10 lg:py-10 xl:h-3/6 xl:mt-14"
         }
       >
         <Link
           to="/home"
-          className="flex justify-center items-center bg-black hover:bg-yellow-400 hover:text-black text-white font-bold py-2 px-4 text-xs ssm:text-sm w-64 mx-2 h-12 sm:text-xl sm:h-16 sm:w-48 sm:mx-10 rounded md:w-4/12 lg:h-20 lg:w-6/12 lg:text-4xl xl:text-xl xl:h-16 xl:w-64 2xl:text-3xl 2xl:h-2/5 2xl:w-1/4"
+          className="flex justify-center items-center bg-black hover:bg-yellow-400 hover:text-black text-white font-bold py-2 px-4 text-xs ssm:text-sm w-64 mx-2 h-12 sm:text-xl sm:h-16 sm:w-64 sm:mx-8 rounded md:w-4/12 lg:h-20 lg:w-6/12 lg:text-4xl xl:text-xl xl:h-16 xl:w-64 2xl:text-3xl 2xl:h-2/5 2xl:w-1/4"
         >
           <span className="text-center">Try our starter's guide!</span>
         </Link>
@@ -153,7 +153,7 @@ const Landing = () => {
         <Link
           to="/home"
           className={
-            "flex justify-center items-center border border-gray-700 hover:bg-gray-400 text-black font-bold py-2 px-4  w-64 mx-2 h-12 text-xs ssm:text-sm sm:text-xl sm:w-48 sm:mx-10 rounded sm:h-16 md:w-4/12 lg:w-6/12 lg:h-20 lg:text-4xl xl:text-xl xl:h-16 xl:w-64 2xl:text-3xl 2xl:h-2/5 2xl:w-1/4"
+            "flex justify-center items-center border border-gray-700 hover:bg-gray-400 text-black font-bold py-2 px-4  w-64 mx-2 h-12 text-xs ssm:text-sm sm:text-xl sm:w-64 sm:mx-8 rounded sm:h-16 md:w-4/12 lg:w-6/12 lg:h-20 lg:text-4xl xl:text-xl xl:h-16 xl:w-64 2xl:text-3xl 2xl:h-2/5 2xl:w-1/4"
           }
         >
           <span className={"text-center"}>I know how to use it.</span>
